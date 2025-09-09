@@ -1,67 +1,81 @@
-$(document).ready(function(){
-    $(window).scroll(function(){
-        // sticky navbar on scroll script
-        if(this.scrollY > 20){
+$(document).ready(function () {
+    // Sticky navbar on scroll
+    $(window).scroll(function () {
+        if (this.scrollY > 20) {
             $('.navbar').addClass("sticky");
-        }else{
+        } else {
             $('.navbar').removeClass("sticky");
         }
-        
-        // scroll-up button show/hide script
-        if(this.scrollY > 500){
+
+        if (this.scrollY > 500) {
             $('.scroll-up-btn').addClass("show");
-        }else{
+        } else {
             $('.scroll-up-btn').removeClass("show");
         }
     });
-    // slide-up script
-    $('.scroll-up-btn').click(function(){
-        $('html').animate({scrollTop: 0});
-        // removing smooth scroll on slide-up button click
+
+    // Slide-up button
+    $('.scroll-up-btn').click(function () {
+        $('html').animate({ scrollTop: 0 });
         $('html').css("scrollBehavior", "auto");
     });
-    $('.navbar .menu li a').click(function(){
-        // applying again smooth scroll on menu items click
+
+    // Smooth scroll on menu click
+    $('.navbar .menu li a').click(function () {
         $('html').css("scrollBehavior", "smooth");
     });
-    // toggle menu/navbar script
-    $('.menu-btn').click(function(){
+
+    // Toggle navbar menu
+    $('.menu-btn').click(function () {
         $('.navbar .menu').toggleClass("active");
         $('.menu-btn i').toggleClass("active");
     });
-    // typing text animation script
+
+    // Typing animations
     var typed = new Typed(".typing", {
-        strings: ["YouTuber", "Developer", "Blogger", "Content Creator",],
+        strings: ["Business Analyst", "Product Enthusiast", "Content Creator"],
         typeSpeed: 100,
         backSpeed: 60,
         loop: true
     });
-    var typed = new Typed(".typing-2", {
-        strings: ["YouTuber", "Developer", "Blogger", "Content Creator"],
+
+    var typed2 = new Typed(".typing-2", {
+        strings: ["Business Analyst", "Product Enthusiast", "Content Creator"],
         typeSpeed: 100,
         backSpeed: 60,
         loop: true
     });
-    // owl carousel script
-    $('.carousel').owlCarousel({
-        margin: 20,
+
+    // Owl Carousel initialization
+    var owl = $(".carousel");
+    owl.owlCarousel({
         loop: true,
-        autoplay: true,
-        autoplayTimeOut: 2000,
-        autoplayHoverPause: true,
+        margin: 20,
+        nav: false,
+        dots: true,
+        autoplay: false,         // Disable default autoplay
         responsive: {
-            0:{
-                items: 1,
-                nav: false
-            },
-            600:{
-                items: 2,
-                nav: false
-            },
-            1000:{
-                items: 3,
-                nav: false
-            }
-        }
+            0: { items: 1 },
+            600: { items: 2 },
+            1000: { items: 3 }
+        },
+        slideBy: 3              // Slide 3 items at a time
+    });
+
+    // Custom autoplay: move 3 items every 3 seconds
+    var autoplayInterval = setInterval(function () {
+        owl.trigger('next.owl.carousel', [3]);
+    }, 3000);
+
+    // Pause on hover
+    owl.on('mouseenter', function () {
+        clearInterval(autoplayInterval);
+    });
+
+    // Resume on mouse leave
+    owl.on('mouseleave', function () {
+        autoplayInterval = setInterval(function () {
+            owl.trigger('next.owl.carousel', [3]);
+        }, 3000);
     });
 });
