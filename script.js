@@ -40,7 +40,7 @@ $(document).ready(function () {
     });
 
     var typed2 = new Typed(".typing-2", {
-        strings: ["Business Analyst", "Product Enthusiast", "Content Creator"],
+        strings: ["Product Analyst", "Product Enthusiast", "Content Creator"],
         typeSpeed: 100,
         backSpeed: 60,
         loop: true
